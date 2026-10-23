@@ -1,0 +1,17 @@
+{
+  "name": "http-100-continue-handshake-state-utils",
+  "version": "0.1.0",
+  "description": "Manages the state of waiting for a 100 Continue response before sending a request body",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": "./src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {}
+}
