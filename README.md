@@ -31,3 +31,10 @@ The trade-off: the machine owns the handshake transitions but **not** time. Ther
 A `100 Continue` can arrive **before** the caller calls `beginAwaiting()`. This happens when the interim response comes back faster than the event loop gets to register the awaiting state. The machine accepts `onContinue()` directly from the initial `EXPECT_SENT` state for exactly this reason. Do not treat `beginAwaiting()` as a prerequisite for `onContinue()` — it is only a prerequisite for entering the `AWAITING_CONTINUE` state.
 
 Once `onFinalResponse()` is called, the machine is terminal and `abort()` will throw. If you need to record a transport error after a final response, do it in your own layer; the handshake is already settled.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
